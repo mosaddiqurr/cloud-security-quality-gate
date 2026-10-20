@@ -1,0 +1,7 @@
+[
+  {
+    "RuleID": "cloudsec2-synthetic-token",
+    "File": "training.env",
+    "StartLine": 1
+  }
+]

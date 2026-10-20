@@ -1,0 +1,3 @@
+[31mFAIL[0m - fixtures/terraform/cloudtrail-insecure.tf - main - CloudTrail example: logging is disabled
+
+[31m4 tests, 3 passed, 0 warnings, 1 failure, 0 exceptions[0m

@@ -1,0 +1,67 @@
+name: Cloud Security Gate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  security:
+    name: Cloud Security Checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Install Conftest
+        run: |
+          cd "$(mktemp -d)"
+          curl -fsSLO https://github.com/open-policy-agent/conftest/releases/download/v0.71.1/conftest_0.71.1_Linux_x86_64.tar.gz
+          curl -fsSLO https://github.com/open-policy-agent/conftest/releases/download/v0.71.1/checksums.txt
+          sha256sum --ignore-missing -c checksums.txt
+          tar -xzf conftest_0.71.1_Linux_x86_64.tar.gz conftest
+          sudo install -m 755 conftest /usr/local/bin/conftest
+
+      - name: Install Parliament
+        run: |
+          python -m pip install "setuptools==80.10.2" "parliament==1.6.4"
+
+      - name: Install Gitleaks
+        run: |
+          cd "$(mktemp -d)"
+          curl -fsSLO https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_linux_x64.tar.gz
+          curl -fsSLO https://github.com/gitleaks/gitleaks/releases/download/v8.30.1/gitleaks_8.30.1_checksums.txt
+          sha256sum --ignore-missing -c gitleaks_8.30.1_checksums.txt
+          tar -xzf gitleaks_8.30.1_linux_x64.tar.gz gitleaks
+          sudo install -m 755 gitleaks /usr/local/bin/gitleaks
+
+      - name: Conftest - Policy Unit Tests
+        run: conftest verify --policy policy
+
+      - name: Conftest - Terraform Security
+        run: conftest test --parser hcl2 terraform/clean/
+
+      - name: Parliament - IAM Validation
+        run: |
+          for file in iam/clean/*.json; do
+            parliament --file "$file" --include-community-auditors --json
+          done
+
+      - name: Gitleaks - File Scan
+        run: gitleaks dir --config configs/gitleaks.toml --redact=100 .
+
+      - name: Gitleaks - Git History Scan
+        run: gitleaks git --config configs/gitleaks.toml --redact=100 .

@@ -1,0 +1,3 @@
+[31mFAIL[0m - fixtures/terraform/ssh-insecure.tf - main - Security group ssh_example: SSH is exposed to 0.0.0.0/0
+
+[31m2 tests, 1 passed, 0 warnings, 1 failure, 0 exceptions[0m

@@ -1,0 +1,10 @@
+title = "CloudSec2 Security Rules"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "cloudsec2-synthetic-token"
+description = "Detect synthetic training tokens"
+regex = '''CS2DEMO_[A-F0-9]{16}'''
+keywords = ["CS2DEMO_"]

@@ -1,0 +1,6 @@
+[31mFAIL[0m - fixtures/terraform/s3-insecure.tf - main - S3 example: block_public_acls must be true
+[31mFAIL[0m - fixtures/terraform/s3-insecure.tf - main - S3 example: block_public_policy must be true
+[31mFAIL[0m - fixtures/terraform/s3-insecure.tf - main - S3 example: ignore_public_acls must be true
+[31mFAIL[0m - fixtures/terraform/s3-insecure.tf - main - S3 example: restrict_public_buckets must be true
+
+[31m4 tests, 0 passed, 0 warnings, 4 failures, 0 exceptions[0m

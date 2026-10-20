@@ -1,0 +1,7 @@
+[
+  {
+    "RuleID": "cloudsec2-synthetic-token",
+    "Description": "Detect synthetic training tokens",
+    "StartLine": 1
+  }
+]

@@ -1,0 +1,3 @@
+[31mFAIL[0m - fixtures/terraform/ebs-insecure.tf - main - EBS volume example: encryption must be explicitly enabled
+
+[31m3 tests, 2 passed, 0 warnings, 1 failure, 0 exceptions[0m

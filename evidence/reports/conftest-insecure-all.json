@@ -1,0 +1,72 @@
+[
+	{
+		"filename": "fixtures/terraform/cloudtrail-insecure.tf",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "CloudTrail example: logging is disabled",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "fixtures/terraform/ebs-insecure.tf",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "EBS volume example: encryption must be explicitly enabled",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "fixtures/terraform/s3-insecure.tf",
+		"namespace": "main",
+		"successes": 0,
+		"failures": [
+			{
+				"msg": "S3 example: block_public_acls must be true",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "S3 example: block_public_policy must be true",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "S3 example: ignore_public_acls must be true",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			},
+			{
+				"msg": "S3 example: restrict_public_buckets must be true",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	},
+	{
+		"filename": "fixtures/terraform/ssh-insecure.tf",
+		"namespace": "main",
+		"successes": 3,
+		"failures": [
+			{
+				"msg": "Security group ssh_example: SSH is exposed to 0.0.0.0/0",
+				"metadata": {
+					"query": "data.main.deny"
+				}
+			}
+		]
+	}
+]

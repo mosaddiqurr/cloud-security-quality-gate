@@ -1,0 +1,22 @@
+[
+	{
+		"filename": "fixtures/terraform/cloudtrail-secure.tf",
+		"namespace": "main",
+		"successes": 4
+	},
+	{
+		"filename": "fixtures/terraform/ebs-secure.tf",
+		"namespace": "main",
+		"successes": 4
+	},
+	{
+		"filename": "fixtures/terraform/s3-secure.tf",
+		"namespace": "main",
+		"successes": 4
+	},
+	{
+		"filename": "fixtures/terraform/ssh-secure.tf",
+		"namespace": "main",
+		"successes": 4
+	}
+]
