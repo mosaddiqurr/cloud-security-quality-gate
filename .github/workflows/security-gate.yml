@@ -57,7 +57,7 @@ jobs:
       - name: Parliament - IAM Validation
         run: |
           for file in iam/clean/*.json; do
-            parliament --file "$file" --include-community-auditors --json
+            parliament --files "$file" --include-community-auditors --json
           done
 
       - name: Gitleaks - File Scan
